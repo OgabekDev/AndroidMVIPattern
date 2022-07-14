@@ -4,15 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.ogabek.mvi_pattern.activity.main.intent_state.MainIntent
 import dev.ogabek.mvi_pattern.activity.main.intent_state.MainState
-import dev.ogabek.mvi_pattern.repository.PostRepository
+import dev.ogabek.mvi_pattern.repository.MainRepository
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val repository: PostRepository): ViewModel() {
+class MainViewModel(private val repository: MainRepository) : ViewModel() {
 
     val mainIntent = Channel<MainIntent>(Channel.UNLIMITED)
     private val _state = MutableStateFlow<MainState>(MainState.Init)

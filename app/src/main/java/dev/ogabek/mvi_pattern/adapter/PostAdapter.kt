@@ -1,5 +1,6 @@
 package dev.ogabek.mvi_pattern.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import dev.ogabek.mvi_pattern.R
+import dev.ogabek.mvi_pattern.activity.details.DetailsActivity
 import dev.ogabek.mvi_pattern.activity.main.MainActivity
 import dev.ogabek.mvi_pattern.model.Post
 import dev.ogabek.mvi_pattern.utils.Utils
@@ -37,7 +39,17 @@ class PostAdapter(var activity: MainActivity, var items: ArrayList<Post>) :
             ll_poster.setOnClickListener {
                 deletePostDialog(post)
             }
+
+            ll_poster.setOnClickListener {
+                openDetailsActivity(post)
+            }
         }
+    }
+
+    private fun openDetailsActivity(post: Post) {
+        val intent = Intent(activity, DetailsActivity::class.java)
+        intent.putExtra("id", post.id)
+        activity.startActivity(intent)
     }
 
     inner class PosterViewHolder(view: View) : RecyclerView.ViewHolder(view) {

@@ -1,11 +1,13 @@
 package dev.ogabek.mvi_pattern.activity.main
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import dev.ogabek.mvi_pattern.activity.create.CreateActivity
 import dev.ogabek.mvi_pattern.activity.main.helper.MainHelperImpl
 import dev.ogabek.mvi_pattern.activity.main.intent_state.MainIntent
 import dev.ogabek.mvi_pattern.activity.main.intent_state.MainState
@@ -36,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     private fun observeViewModel() {
         lifecycleScope.launch {
             viewModel.state.collect {
-                when(it) {
+                when (it) {
                     is MainState.Init -> {
                         Log.d("MainActivity", "Init")
                     }
@@ -75,6 +77,10 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
 
         intentAllPosts()
+
+        binding.btnCreate.setOnClickListener {
+            startActivity(Intent(this, CreateActivity::class.java))
+        }
 
     }
 
